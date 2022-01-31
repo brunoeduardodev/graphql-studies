@@ -9,6 +9,7 @@
     "dev": "ts-node-dev src/server.ts"
   },
   "dependencies": {
+    "@prisma/client": "3.8.1",
     "apollo-server": "^3.6.2",
     "graphql": "^16.3.0"
   },
