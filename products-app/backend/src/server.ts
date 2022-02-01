@@ -1,15 +1,20 @@
 import { ApolloServer } from "apollo-server";
-import { resolvers } from "./resolvers";
-import { typeDefs } from "./schema";
+import { resolvers } from "./graphql/resolvers";
+import { typeDefs } from "./graphql/schema";
 import { PrismaClient } from "@prisma/client";
+import { getUserFromHeaders } from "./validations/auth";
 
 const prisma = new PrismaClient();
 
 const server = new ApolloServer({
   resolvers,
   typeDefs,
-  context: {
-    prisma,
+  context: ({ req }) => {
+    const user = getUserFromHeaders(req.headers);
+    return {
+      prisma,
+      user,
+    };
   },
 });
 

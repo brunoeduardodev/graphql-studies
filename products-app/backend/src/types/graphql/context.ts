@@ -1,4 +1,5 @@
-import { PrismaClient, Prisma } from "@prisma/client";
+import { PrismaClient, Prisma, User } from "@prisma/client";
+import { AuthUser } from "../auth";
 
 export type Context = {
   prisma: PrismaClient<
@@ -6,4 +7,6 @@ export type Context = {
     never,
     Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
   >;
+
+  user?: AuthUser;
 };
